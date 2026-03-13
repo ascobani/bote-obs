@@ -12,26 +12,26 @@ graph ER {
     // ─────────────────────────────────────────
     // ENTITIES (rectangles)
     // ─────────────────────────────────────────
-    Faculty          [shape=box  label="Faculty"]
-    Departments      [shape=box  label="Departments"]
-    User             [shape=box  label="User"]
-    Role             [shape=box  label="Role"]
-    Permission       [shape=box  label="Permission"]
-    Course           [shape=box  label="Course"]
-    DepartmentCourse [shape=box  label="DepartmentCourse"]
-    Enrollment       [shape=box  label="Enrollment"]
+    Faculty              [shape=box label="Faculty"]
+    Departments          [shape=box label="Departments"]
+    User                 [shape=box label="User"]
+    Role                 [shape=box label="Role"]
+    Permission           [shape=box label="Permission"]
+    Course               [shape=box label="Course"]
+    DepartmentCourse     [shape=box label="DepartmentCourse"]
+    Enrollment           [shape=box label="Enrollment"]
     UserCourseEnrollment [shape=box label="UserCourseEnrollment"]
-    Timetable        [shape=box  label="Timetable"]
-    GradeWeightConfig [shape=box label="GradeWeightConfig"]
-    ExamComponent    [shape=box  label="ExamComponent"]
-    Grade            [shape=box  label="Grade"]
-    ExamScore        [shape=box  label="ExamScore"]
-    Club             [shape=box  label="Club"]
-    MediaFile        [shape=box  label="MediaFile"]
+    Timetable            [shape=box label="Timetable"]
+    GradeWeightConfig    [shape=box label="GradeWeightConfig"]
+    ExamComponent        [shape=box label="ExamComponent"]
+    Grade                [shape=box label="Grade"]
+    ExamScore            [shape=box label="ExamScore"]
+    Club                 [shape=box label="Club"]
+    MediaFile            [shape=box label="MediaFile"]
 
     // ─────────────────────────────────────────
     // ATTRIBUTES (ellipses)
-    // PK attributes use HTML underline label
+    // PK = underlined, FK = "(FK)" suffix
     // ─────────────────────────────────────────
 
     // Faculty
@@ -41,81 +41,155 @@ graph ER {
     Faculty -- f_name
 
     // Departments
-    d_id   [shape=ellipse label=<<u>ID</u>>]
-    d_name [shape=ellipse label="Name"]
+    d_id        [shape=ellipse label=<<u>ID</u>>]
+    d_name      [shape=ellipse label="Name"]
+    d_facultyid [shape=ellipse label="FacultyID (FK)"]
     Departments -- d_id
     Departments -- d_name
+    Departments -- d_facultyid
 
     // User
-    u_id      [shape=ellipse label=<<u>ID</u>>]
-    u_studnum [shape=ellipse label="StudNum"]
-    u_name    [shape=ellipse label="Name"]
-    u_email   [shape=ellipse label="Email1"]
+    u_id                  [shape=ellipse label=<<u>ID</u>>]
+    u_studnum             [shape=ellipse label="StudNum"]
+    u_name                [shape=ellipse label="Name"]
+    u_surname             [shape=ellipse label="SurName"]
+    u_phone1              [shape=ellipse label="PhoneNumber1"]
+    u_phone2              [shape=ellipse label="PhoneNumber2"]
+    u_phone3              [shape=ellipse label="PhoneNumber3"]
+    u_email1              [shape=ellipse label="Email1"]
+    u_email2              [shape=ellipse label="Email2"]
+    u_fam_addr            [shape=ellipse label="FamilyAddress"]
+    u_fam_city            [shape=ellipse label="FamilyCity"]
+    u_fam_state           [shape=ellipse label="FamilyState"]
+    u_fam_postal          [shape=ellipse label="FamilyPostalCode"]
+    u_fam_country         [shape=ellipse label="FamilyCountry"]
+    u_res_addr            [shape=ellipse label="ResidenceAddress"]
+    u_res_city            [shape=ellipse label="ResidenceCity"]
+    u_res_state           [shape=ellipse label="ResidenceState"]
+    u_res_postal          [shape=ellipse label="ResidencePostalCode"]
+    u_res_country         [shape=ellipse label="ResidenceCountry"]
+    u_password            [shape=ellipse label="Password"]
     User -- u_id
     User -- u_studnum
     User -- u_name
-    User -- u_email
+    User -- u_surname
+    User -- u_phone1
+    User -- u_phone2
+    User -- u_phone3
+    User -- u_email1
+    User -- u_email2
+    User -- u_fam_addr
+    User -- u_fam_city
+    User -- u_fam_state
+    User -- u_fam_postal
+    User -- u_fam_country
+    User -- u_res_addr
+    User -- u_res_city
+    User -- u_res_state
+    User -- u_res_postal
+    User -- u_res_country
+    User -- u_password
 
     // Role
-    r_id   [shape=ellipse label=<<u>ID</u>>]
-    r_name [shape=ellipse label="Name"]
-    r_active [shape=ellipse label="Active"]
+    r_id          [shape=ellipse label=<<u>ID</u>>]
+    r_name        [shape=ellipse label="Name"]
+    r_displayname [shape=ellipse label="DisplayName"]
+    r_description [shape=ellipse label="Description"]
+    r_active      [shape=ellipse label="Active"]
     Role -- r_id
     Role -- r_name
+    Role -- r_displayname
+    Role -- r_description
     Role -- r_active
 
     // Permission
-    p_id       [shape=ellipse label=<<u>ID</u>>]
-    p_name     [shape=ellipse label="Name"]
-    p_resource [shape=ellipse label="Resource"]
-    p_action   [shape=ellipse label="Action"]
+    p_id          [shape=ellipse label=<<u>ID</u>>]
+    p_name        [shape=ellipse label="Name"]
+    p_resource    [shape=ellipse label="Resource"]
+    p_action      [shape=ellipse label="Action"]
+    p_description [shape=ellipse label="Description"]
+    p_active      [shape=ellipse label="Active"]
     Permission -- p_id
     Permission -- p_name
     Permission -- p_resource
     Permission -- p_action
+    Permission -- p_description
+    Permission -- p_active
 
     // Course
-    c_id      [shape=ellipse label=<<u>ID</u>>]
-    c_code    [shape=ellipse label="CourseCode"]
-    c_name    [shape=ellipse label="CourseName"]
-    c_type    [shape=ellipse label="CourseType"]
-    c_credit  [shape=ellipse label="Credit"]
-    c_ects    [shape=ellipse label="ECTS"]
+    c_id            [shape=ellipse label=<<u>ID</u>>]
+    c_code          [shape=ellipse label="CourseCode"]
+    c_name          [shape=ellipse label="CourseName"]
+    c_type          [shape=ellipse label="CourseType"]
+    c_year          [shape=ellipse label="Year"]
+    c_group         [shape=ellipse label="Group"]
+    c_required      [shape=ellipse label="Required"]
+    c_theoryhours   [shape=ellipse label="TheoryHours"]
+    c_practicehours [shape=ellipse label="PracticeHours"]
+    c_credit        [shape=ellipse label="Credit"]
+    c_ects          [shape=ellipse label="ECTS"]
+    c_quota         [shape=ellipse label="Quota"]
     Course -- c_id
     Course -- c_code
     Course -- c_name
     Course -- c_type
+    Course -- c_year
+    Course -- c_group
+    Course -- c_required
+    Course -- c_theoryhours
+    Course -- c_practicehours
     Course -- c_credit
     Course -- c_ects
+    Course -- c_quota
 
     // DepartmentCourse
-    dc_id [shape=ellipse label=<<u>ID</u>>]
+    dc_id           [shape=ellipse label=<<u>ID</u>>]
+    dc_departmentid [shape=ellipse label="DepartmentID (FK)"]
+    dc_courseid     [shape=ellipse label="CourseID (FK)"]
+    dc_instructorid [shape=ellipse label="InstructorID (FK)"]
     DepartmentCourse -- dc_id
+    DepartmentCourse -- dc_departmentid
+    DepartmentCourse -- dc_courseid
+    DepartmentCourse -- dc_instructorid
 
     // Enrollment
-    en_id   [shape=ellipse label=<<u>ID</u>>]
-    en_type [shape=ellipse label="EnrollmentType"]
-    en_year [shape=ellipse label="Year"]
-    en_sem  [shape=ellipse label="Semester"]
-    en_act  [shape=ellipse label="Active"]
+    en_id           [shape=ellipse label=<<u>ID</u>>]
+    en_userid       [shape=ellipse label="UserID (FK)"]
+    en_departmentid [shape=ellipse label="DepartmentID (FK)"]
+    en_type         [shape=ellipse label="EnrollmentType"]
+    en_year         [shape=ellipse label="Year"]
+    en_sem          [shape=ellipse label="Semester"]
+    en_date         [shape=ellipse label="EnrollmentDate"]
+    en_active       [shape=ellipse label="Active"]
     Enrollment -- en_id
+    Enrollment -- en_userid
+    Enrollment -- en_departmentid
     Enrollment -- en_type
     Enrollment -- en_year
     Enrollment -- en_sem
-    Enrollment -- en_act
+    Enrollment -- en_date
+    Enrollment -- en_active
 
     // UserCourseEnrollment
-    uce_id     [shape=ellipse label=<<u>ID</u>>]
-    uce_sem    [shape=ellipse label="Semester"]
-    uce_year   [shape=ellipse label="Year"]
-    uce_status [shape=ellipse label="Status"]
+    uce_id           [shape=ellipse label=<<u>ID</u>>]
+    uce_userid       [shape=ellipse label="UserID (FK)"]
+    uce_dcid         [shape=ellipse label="DepartmentCourseID (FK)"]
+    uce_timetableid  [shape=ellipse label="TimetableID (FK)"]
+    uce_sem          [shape=ellipse label="Semester"]
+    uce_year         [shape=ellipse label="Year"]
+    uce_status       [shape=ellipse label="Status"]
     UserCourseEnrollment -- uce_id
+    UserCourseEnrollment -- uce_userid
+    UserCourseEnrollment -- uce_dcid
+    UserCourseEnrollment -- uce_timetableid
     UserCourseEnrollment -- uce_sem
     UserCourseEnrollment -- uce_year
     UserCourseEnrollment -- uce_status
 
     // Timetable
     tt_id       [shape=ellipse label=<<u>ID</u>>]
+    tt_facid    [shape=ellipse label="FacultyID (FK)"]
+    tt_dcid     [shape=ellipse label="DepartmentCourseID (FK)"]
     tt_year     [shape=ellipse label="AcademicYear"]
     tt_sem      [shape=ellipse label="Semester"]
     tt_day      [shape=ellipse label="DayOfWeek"]
@@ -123,6 +197,8 @@ graph ER {
     tt_end      [shape=ellipse label="EndTime"]
     tt_room     [shape=ellipse label="Classroom"]
     Timetable -- tt_id
+    Timetable -- tt_facid
+    Timetable -- tt_dcid
     Timetable -- tt_year
     Timetable -- tt_sem
     Timetable -- tt_day
@@ -131,162 +207,167 @@ graph ER {
     Timetable -- tt_room
 
     // GradeWeightConfig
-    gwc_id [shape=ellipse label=<<u>ID</u>>]
+    gwc_id   [shape=ellipse label=<<u>ID</u>>]
+    gwc_dcid [shape=ellipse label="DepartmentCourseID (FK)"]
     GradeWeightConfig -- gwc_id
+    GradeWeightConfig -- gwc_dcid
 
     // ExamComponent
-    ec_id      [shape=ellipse label=<<u>ID</u>>]
-    ec_name    [shape=ellipse label="Name"]
-    ec_weight  [shape=ellipse label="Weight"]
-    ec_makeup  [shape=ellipse label="IsMakeup"]
+    ec_id         [shape=ellipse label=<<u>ID</u>>]
+    ec_gwcid      [shape=ellipse label="GradeWeightConfigID (FK)"]
+    ec_name       [shape=ellipse label="Name"]
+    ec_weight     [shape=ellipse label="Weight"]
+    ec_order      [shape=ellipse label="DisplayOrder"]
+    ec_makeup     [shape=ellipse label="IsMakeup"]
+    ec_replacesid [shape=ellipse label="ReplacesComponentID (FK)"]
     ExamComponent -- ec_id
+    ExamComponent -- ec_gwcid
     ExamComponent -- ec_name
     ExamComponent -- ec_weight
+    ExamComponent -- ec_order
     ExamComponent -- ec_makeup
+    ExamComponent -- ec_replacesid
 
     // Grade
-    g_id     [shape=ellipse label=<<u>ID</u>>]
-    g_raw    [shape=ellipse label="RawScore"]
-    g_letter [shape=ellipse label="LetterGrade"]
-    g_gpa    [shape=ellipse label="GradePoint"]
+    g_id      [shape=ellipse label=<<u>ID</u>>]
+    g_uceid   [shape=ellipse label="UserCourseEnrollmentID (FK)"]
+    g_raw     [shape=ellipse label="RawScore"]
+    g_letter  [shape=ellipse label="LetterGrade"]
+    g_gpa     [shape=ellipse label="GradePoint"]
     Grade -- g_id
+    Grade -- g_uceid
     Grade -- g_raw
     Grade -- g_letter
     Grade -- g_gpa
 
     // ExamScore
     es_id    [shape=ellipse label=<<u>ID</u>>]
+    es_gid   [shape=ellipse label="GradeID (FK)"]
+    es_ecid  [shape=ellipse label="ExamComponentID (FK)"]
     es_score [shape=ellipse label="Score"]
     ExamScore -- es_id
+    ExamScore -- es_gid
+    ExamScore -- es_ecid
     ExamScore -- es_score
 
     // Club
-    cl_id     [shape=ellipse label=<<u>ID</u>>]
-    cl_name   [shape=ellipse label="Name"]
-    cl_email  [shape=ellipse label="Email"]
-    cl_active [shape=ellipse label="Active"]
+    cl_id      [shape=ellipse label=<<u>ID</u>>]
+    cl_name    [shape=ellipse label="Name"]
+    cl_commnum [shape=ellipse label="CommunicationNumber"]
+    cl_email   [shape=ellipse label="Email"]
+    cl_active  [shape=ellipse label="Active"]
     Club -- cl_id
     Club -- cl_name
+    Club -- cl_commnum
     Club -- cl_email
     Club -- cl_active
 
     // MediaFile
-    mf_id      [shape=ellipse label=<<u>ID</u>>]
-    mf_owner   [shape=ellipse label="OwnerID / OwnerType"]
-    mf_purpose [shape=ellipse label="Purpose"]
-    mf_status  [shape=ellipse label="Status"]
-    mf_key     [shape=ellipse label="Key"]
+    mf_id        [shape=ellipse label=<<u>ID</u>>]
+    mf_ownerid   [shape=ellipse label="OwnerID"]
+    mf_ownertype [shape=ellipse label="OwnerType"]
+    mf_purpose   [shape=ellipse label="Purpose"]
+    mf_status    [shape=ellipse label="Status"]
+    mf_bucket    [shape=ellipse label="Bucket"]
+    mf_key       [shape=ellipse label="Key"]
+    mf_filename  [shape=ellipse label="FileName"]
+    mf_mimetype  [shape=ellipse label="MimeType"]
+    mf_size      [shape=ellipse label="Size"]
     MediaFile -- mf_id
-    MediaFile -- mf_owner
+    MediaFile -- mf_ownerid
+    MediaFile -- mf_ownertype
     MediaFile -- mf_purpose
     MediaFile -- mf_status
+    MediaFile -- mf_bucket
     MediaFile -- mf_key
+    MediaFile -- mf_filename
+    MediaFile -- mf_mimetype
+    MediaFile -- mf_size
 
     // ─────────────────────────────────────────
     // RELATIONSHIPS (diamonds)
     // ─────────────────────────────────────────
 
-    // Faculty → Departments
-    rel_fac_dept [shape=diamond label="Has"]
-    Faculty      -- rel_fac_dept [label="1"]
-    rel_fac_dept -- Departments  [label="N"]
+    rel_fac_dept  [shape=diamond label="Has"]
+    Faculty       -- rel_fac_dept [label="1"]
+    rel_fac_dept  -- Departments  [label="N"]
 
-    // Faculty → Timetable
-    rel_fac_tt  [shape=diamond label="Schedules"]
-    Faculty     -- rel_fac_tt  [label="1"]
-    rel_fac_tt  -- Timetable   [label="N"]
+    rel_fac_tt    [shape=diamond label="Schedules"]
+    Faculty       -- rel_fac_tt   [label="1"]
+    rel_fac_tt    -- Timetable    [label="N"]
 
-    // Departments → DepartmentCourse
-    rel_dept_dc  [shape=diamond label="Offers"]
-    Departments  -- rel_dept_dc  [label="1"]
-    rel_dept_dc  -- DepartmentCourse [label="N"]
+    rel_dept_dc   [shape=diamond label="Offers"]
+    Departments   -- rel_dept_dc        [label="1"]
+    rel_dept_dc   -- DepartmentCourse   [label="N"]
 
-    // Course → DepartmentCourse
-    rel_course_dc  [shape=diamond label="AssignedVia"]
-    Course         -- rel_course_dc  [label="1"]
-    rel_course_dc  -- DepartmentCourse [label="N"]
+    rel_course_dc [shape=diamond label="AssignedVia"]
+    Course        -- rel_course_dc      [label="1"]
+    rel_course_dc -- DepartmentCourse   [label="N"]
 
-    // User (Instructor) → DepartmentCourse
-    rel_inst_dc  [shape=diamond label="Instructs"]
-    User         -- rel_inst_dc  [label="1"]
-    rel_inst_dc  -- DepartmentCourse [label="N"]
+    rel_inst_dc   [shape=diamond label="Instructs"]
+    User          -- rel_inst_dc        [label="1"]
+    rel_inst_dc   -- DepartmentCourse   [label="N"]
 
-    // Departments → Enrollment
-    rel_dept_en  [shape=diamond label="EnrolledInto"]
-    Departments  -- rel_dept_en  [label="1"]
-    rel_dept_en  -- Enrollment   [label="N"]
+    rel_dept_en   [shape=diamond label="EnrolledInto"]
+    Departments   -- rel_dept_en  [label="1"]
+    rel_dept_en   -- Enrollment   [label="N"]
 
-    // User → Enrollment
-    rel_user_en  [shape=diamond label="HasEnrollment"]
-    User         -- rel_user_en  [label="1"]
-    rel_user_en  -- Enrollment   [label="N"]
+    rel_user_en   [shape=diamond label="HasEnrollment"]
+    User          -- rel_user_en  [label="1"]
+    rel_user_en   -- Enrollment   [label="N"]
 
-    // User → UserCourseEnrollment
     rel_user_uce  [shape=diamond label="Takes"]
-    User          -- rel_user_uce  [label="1"]
-    rel_user_uce  -- UserCourseEnrollment [label="N"]
+    User          -- rel_user_uce          [label="1"]
+    rel_user_uce  -- UserCourseEnrollment  [label="N"]
 
-    // DepartmentCourse → UserCourseEnrollment
-    rel_dc_uce   [shape=diamond label="EnrolledBy"]
-    DepartmentCourse -- rel_dc_uce   [label="1"]
-    rel_dc_uce   -- UserCourseEnrollment [label="N"]
+    rel_dc_uce    [shape=diamond label="EnrolledBy"]
+    DepartmentCourse -- rel_dc_uce         [label="1"]
+    rel_dc_uce    -- UserCourseEnrollment  [label="N"]
 
-    // Timetable → UserCourseEnrollment
-    rel_tt_uce  [shape=diamond label="ReferencedBy"]
-    Timetable   -- rel_tt_uce  [label="1"]
-    rel_tt_uce  -- UserCourseEnrollment [label="N"]
+    rel_tt_uce    [shape=diamond label="ReferencedBy"]
+    Timetable     -- rel_tt_uce            [label="1"]
+    rel_tt_uce    -- UserCourseEnrollment  [label="N"]
 
-    // DepartmentCourse → Timetable
-    rel_dc_tt    [shape=diamond label="ScheduledIn"]
+    rel_dc_tt     [shape=diamond label="ScheduledIn"]
     DepartmentCourse -- rel_dc_tt  [label="1"]
-    rel_dc_tt    -- Timetable      [label="N"]
+    rel_dc_tt     -- Timetable     [label="N"]
 
-    // DepartmentCourse → GradeWeightConfig
-    rel_dc_gwc   [shape=diamond label="HasConfig"]
-    DepartmentCourse  -- rel_dc_gwc   [label="1"]
-    rel_dc_gwc   -- GradeWeightConfig [label="1"]
+    rel_dc_gwc    [shape=diamond label="HasConfig"]
+    DepartmentCourse  -- rel_dc_gwc        [label="1"]
+    rel_dc_gwc    -- GradeWeightConfig     [label="1"]
 
-    // GradeWeightConfig → ExamComponent
-    rel_gwc_ec  [shape=diamond label="Contains"]
+    rel_gwc_ec    [shape=diamond label="Contains"]
     GradeWeightConfig -- rel_gwc_ec  [label="1"]
-    rel_gwc_ec  -- ExamComponent     [label="N"]
+    rel_gwc_ec    -- ExamComponent   [label="N"]
 
-    // ExamComponent self-ref (makeup)
-    rel_makeup  [shape=diamond label="MakeupReplaces"]
-    ExamComponent -- rel_makeup [label="0..1"]
-    rel_makeup  -- ExamComponent [label="1"]
+    rel_makeup    [shape=diamond label="MakeupReplaces"]
+    ExamComponent -- rel_makeup      [label="0..1"]
+    rel_makeup    -- ExamComponent   [label="1"]
 
-    // UserCourseEnrollment → Grade
-    rel_uce_grade  [shape=diamond label="HasGrade"]
+    rel_uce_grade [shape=diamond label="HasGrade"]
     UserCourseEnrollment -- rel_uce_grade [label="1"]
-    rel_uce_grade  -- Grade               [label="1"]
+    rel_uce_grade -- Grade                [label="1"]
 
-    // Grade → ExamScore
     rel_grade_es  [shape=diamond label="Contains"]
     Grade         -- rel_grade_es  [label="1"]
     rel_grade_es  -- ExamScore     [label="N"]
 
-    // ExamComponent → ExamScore
-    rel_ec_es    [shape=diamond label="ScoredIn"]
+    rel_ec_es     [shape=diamond label="ScoredIn"]
     ExamComponent -- rel_ec_es  [label="1"]
-    rel_ec_es    -- ExamScore   [label="N"]
+    rel_ec_es     -- ExamScore  [label="N"]
 
-    // Role ↔ Permission (via RolePermission)
-    rel_role_perm  [shape=diamond label="GrantedVia"]
-    Role           -- rel_role_perm  [label="M"]
-    rel_role_perm  -- Permission     [label="N"]
+    rel_role_perm [shape=diamond label="GrantedVia"]
+    Role          -- rel_role_perm  [label="M"]
+    rel_role_perm -- Permission     [label="N"]
 
-    // User ↔ Role (via UserRole)
-    rel_user_role  [shape=diamond label="AssignedTo"]
-    User           -- rel_user_role  [label="M"]
-    rel_user_role  -- Role           [label="N"]
+    rel_user_role [shape=diamond label="AssignedTo"]
+    User          -- rel_user_role  [label="M"]
+    rel_user_role -- Role           [label="N"]
 
-    // Club → ClubMember
     rel_club_mem  [shape=diamond label="HasMember"]
     Club          -- rel_club_mem  [label="1"]
     rel_club_mem  -- User          [label="N"]
 
-    // Club → ClubAdministrators
     rel_club_adm  [shape=diamond label="ManagedBy"]
     Club          -- rel_club_adm  [label="1"]
     rel_club_adm  -- User          [label="N"]
